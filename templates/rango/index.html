@@ -1,0 +1,44 @@
+<!DOCTYPE> {% load staticfiles %}
+
+<html>
+
+<head>
+    <title>Rango</title>
+    <link rel="stylesheet" href="{% static " css/base.css " %}">
+    <script src="{% static " js/jquery.js " %}"></script>
+</head>
+
+<body>
+    <div class="categories">
+        <h1>Categories</h1>
+        {% if categories %}
+        <h3>Most liked categories</h3>
+        <ul>
+            {% for category in categories %}
+                <li class="category">
+                    <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>No categories to be shown</strong> 
+        {% endif %}
+    </div>
+    <div class="pages">
+        {% if pages %}
+            <h2>Most viewed pages</h2>
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a>[{{ page.views }} views]</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2>No pages</h2>
+        {% endif %}
+    </div>
+    <div>
+        <a href="/rango/about">About Rango</a>
+    </div>
+</body>
+
+</html>
