@@ -23,10 +23,11 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media') #Serves dynamic data
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yhda(c_n6s#c4s!pd4i^kqwqw7ah+n2y!^kd=b67ptru#7ba_$'
+with open('.secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -134,3 +135,8 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
 LOGIN_URL = 'rango/login'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
