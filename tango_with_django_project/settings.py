@@ -137,6 +137,7 @@ MEDIA_URL = '/media/'
 LOGIN_URL = 'rango/login'
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
+    print("Fail")
     pass
