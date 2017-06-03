@@ -1,14 +1,12 @@
-<!DOCTYPE>
+{% extends "rango/base.html" %}
 {% load staticfiles %}
-<html>
-    <head>
-        <title>About</title>
-        <link rel="stylesheet" href="{% static "css/base.css" %}">
-        <script src="{% static "js/jquery.js" }%"></script>
-    </head>
-    <body>
-        <h1>About page</h1>
-        <p>You are so cool, this and all the project will be done</p>
-        <img src="{{ MEDIA_URL }}cat.jpg"alt="Cat image">
-    </body>
-</html>
+
+{% block title_block %}
+    About
+{% endblock title_block %}
+{% block body_block %}
+    <h1>About page</h1>
+    <p>You are so cool, this and all the project will be done</p>
+    <img src="{{ MEDIA_URL }}cat.jpg"alt="Cat image">
+    <p>You have visited the page: {{ visits }} times.</p>
+{% endblock body_block %}

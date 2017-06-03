@@ -1,0 +1,19 @@
+<ul>
+    {% if categories %}
+        {% for category in categories %}
+            {% if category == active_category %}
+                <li>
+                    <strong>
+                        <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
+                    </strong>
+                </li>            
+            {% else %}
+                <li>
+                        <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <li><strong>There are not categories.</strong></li>
+    {% endif %}
+</ul>

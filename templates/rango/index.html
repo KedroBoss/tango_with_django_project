@@ -1,14 +1,9 @@
-<!DOCTYPE> {% load staticfiles %}
-
-<html>
-
-<head>
-    <title>Rango</title>
-    <link rel="stylesheet" href="{% static " css/base.css " %}">
-    <script src="{% static " js/jquery.js " %}"></script>
-</head>
-
-<body>
+{% extends "rango/base.html" %}
+{% load staticfiles %}
+{% block title_block %}
+    Home
+{% endblock title_block %}
+{% block body_block %}
     <div class="categories">
         <h1>Categories</h1>
         {% if categories %}
@@ -16,7 +11,7 @@
         <ul>
             {% for category in categories %}
                 <li class="category">
-                    <a href="/rango/category/{{ category.slug }}">{{ category.name }}</a>
+                    <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -36,9 +31,4 @@
             <h2>No pages</h2>
         {% endif %}
     </div>
-    <div>
-        <a href="/rango/about">About Rango</a>
-    </div>
-</body>
-
-</html>
+{% endblock body_block %}
