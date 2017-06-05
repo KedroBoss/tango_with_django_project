@@ -4,31 +4,40 @@
     Home
 {% endblock title_block %}
 {% block body_block %}
-    <div class="categories">
-        <h1>Categories</h1>
-        {% if categories %}
-        <h3>Most liked categories</h3>
-        <ul>
-            {% for category in categories %}
-                <li class="category">
-                    <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="jumbotron">
+        <h1 class="display-3"></h1>
+        {% if user.is_authenticated %}
+            <h1>Hello {{ user.username }}!</h1>
         {% else %}
-            <strong>No categories to be shown</strong> 
+            <h1>Hello there!</h1>
         {% endif %}
     </div>
-    <div class="pages">
-        {% if pages %}
-            <h2>Most viewed pages</h2>
-            <ul>
-                {% for page in pages %}
-                    <li><a href="{{ page.url }}">{{ page.title }}</a>[{{ page.views }} views]</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h2>No pages</h2>
-        {% endif %}
+    <div class="row marketing">
+        <div class="col-lg-6">
+            {% if categories %}
+            <h4>Most Liked Categories</h4>
+                <ul class="list-group">
+                    {% for category in categories %}
+                        <li class="list-group-item">
+                            <a href="{% url 'show_category' category.slug %}">{{ category.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <strong>No categories to be shown.</strong> 
+            {% endif %}
+        </div>
+        <div class="col-lg-6">
+            {% if pages %}
+                <h4>Most viewed pages</h4>
+                <ul class="list-group">
+                    {% for page in pages %}
+                        <li class="list-group-item"><a href="{{ page.url }}">{{ page.title }}</a>[{{ page.views }} views]</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>No pages to be shown.</h2>
+            {% endif %}
+        </div>
     </div>
 {% endblock body_block %}
