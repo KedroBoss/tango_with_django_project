@@ -12,7 +12,7 @@
         <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
             {% csrf_token %}
             <div class="form-group">
-                <input class="form-control" type="text" size="50" name="query" id="query">
+                <input class="form-control" type="text" size="50" name="query" id="query" value="{{ query }}">
             </div>
             <button class="btn btn-primary" type="submit" name="submit">Search</button>
         </form>

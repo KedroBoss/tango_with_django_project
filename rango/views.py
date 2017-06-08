@@ -23,14 +23,16 @@ def get_server_side_cookie(request, cookie, default_val=None):
         val = default_val
     return val
 
+
 def visitor_counter_handler(request):
     visits = int(get_server_side_cookie(request, 'visits', '1'))
 
-    last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
+    last_visit_cookie = get_server_side_cookie(
+        request, 'last_visit', str(datetime.now()))
     last_visit_time = datetime.strptime(
         last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
 
-    if (datetime.now() - last_visit_time).days > 0: # Should be .days
+    if (datetime.now() - last_visit_time).days > 0:  # Should be .days
         visits += 1
         request.session['last_visit'] = str(datetime.now())
     else:
@@ -57,7 +59,7 @@ def index(request):
 
 def about(request):
     visits = int(get_server_side_cookie(request, 'visits', '1'))
-    return render(request, 'rango/about.html', context={'visits':visits})
+    return render(request, 'rango/about.html', context={'visits': visits})
 
 
 def show_category(request, category_name_slug):
@@ -181,10 +183,11 @@ def user_logout(request):
 
 def search(request):
     result_list = []
-
+    context_dict = {}
     if request.method == "POST":
         query = request.POST['query'].strip()
         if query:
             result_list = run_query(query)
-    
-    return render(request, 'rango/search.html', {'result_list':result_list})
+            context_dict = {'result_list': result_list, 'query': query}
+
+    return render(request, 'rango/search.html', context_dict)
