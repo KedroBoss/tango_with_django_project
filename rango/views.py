@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Category, Page
@@ -191,3 +191,19 @@ def search(request):
             context_dict = {'result_list': result_list, 'query': query}
 
     return render(request, 'rango/search.html', context_dict)
+
+
+def track_url(request):
+    page_id = None
+    url = ''
+    if request.method == 'GET':
+        if 'page_id' in request.GET:
+            try:
+                page_id = request.GET['page_id']
+                page = Page.objects.get(pk=page_id)
+                page.views += 1
+                page.save()
+                url = page.url
+            except:
+                pass
+    return redirect(url)
